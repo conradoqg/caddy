@@ -17,8 +17,10 @@
 package browse
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
@@ -32,6 +34,7 @@ import (
 	"github.com/dustin/go-humanize"
 	"github.com/mholt/caddy/caddyhttp/httpserver"
 	"github.com/mholt/caddy/caddyhttp/staticfiles"
+	blackfriday "gopkg.in/russross/blackfriday.v2"
 )
 
 const (
@@ -76,6 +79,11 @@ type Listing struct {
 
 	// The number of files (items that aren't directories) in the listing
 	NumFiles int
+
+	// If the directory has a readme.md file
+	HasReadmeFile bool
+
+	Readme string
 
 	// Which sorting order is used
 	Sort string
@@ -247,6 +255,8 @@ func directoryListing(files []os.FileInfo, canGoUp bool, urlPath string, config 
 		fileinfos           []FileInfo
 		dirCount, fileCount int
 		hasIndexFile        bool
+		hasReadmeFile       bool
+		readme              string
 	)
 
 	for _, f := range files {
@@ -256,6 +266,16 @@ func directoryListing(files []os.FileInfo, canGoUp bool, urlPath string, config 
 			if name == indexName {
 				hasIndexFile = true
 				break
+			} else if name == "README.md" {
+				f, err := config.Fs.Root.Open(urlPath + name)
+				if err == nil {
+					reader := bufio.NewReader(f)
+					markdown, err := ioutil.ReadAll(reader)
+					if err == nil {
+						readme = string(blackfriday.Run(markdown))
+						hasReadmeFile = true
+					}
+				}
 			}
 		}
 
@@ -286,12 +306,14 @@ func directoryListing(files []os.FileInfo, canGoUp bool, urlPath string, config 
 	}
 
 	return Listing{
-		Name:     path.Base(urlPath),
-		Path:     urlPath,
-		CanGoUp:  canGoUp,
-		Items:    fileinfos,
-		NumDirs:  dirCount,
-		NumFiles: fileCount,
+		Name:          path.Base(urlPath),
+		Path:          urlPath,
+		CanGoUp:       canGoUp,
+		Items:         fileinfos,
+		NumDirs:       dirCount,
+		NumFiles:      fileCount,
+		HasReadmeFile: hasReadmeFile,
+		Readme:        readme,
 	}, hasIndexFile
 }
 

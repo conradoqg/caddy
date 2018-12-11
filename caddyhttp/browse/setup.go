@@ -324,7 +324,24 @@ footer {
 		max-width: 100px;
 	}
 }
+
+.markdown-body {
+	box-sizing: border-box;
+	min-width: 400px;				
+	margin: 0 auto;
+	padding-left: 4.9%;
+	padding-right: 4.9%;
+	padding-top: 25px;		
+	padding-bottom: 25px;		
+}
+
+@media (max-width: 767px) {
+	.markdown-body {
+		padding: 15px;
+	}
+}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css" />
 	</head>
 	<body onload='filter()'>
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="0" width="0" style="position: absolute;">
@@ -377,6 +394,7 @@ footer {
 			</h1>
 		</header>
 		<main>
+			{{if .HasReadmeFile}}<div class="markdown-body">{{.Readme}}</div>{{end}}
 			<div class="meta">
 				<div id="summary">
 					<span class="meta-item"><b>{{.NumDirs}}</b> director{{if eq 1 .NumDirs}}y{{else}}ies{{end}}</span>
@@ -386,7 +404,7 @@ footer {
 					{{- end}}
 					<span class="meta-item"><input type="text" placeholder="filter" id="filter" onkeyup='filter()'></span>
 				</div>
-			</div>
+			</div>			
 			<div class="listing">
 				<table aria-describedby="summary">
 					<thead>
@@ -469,10 +487,7 @@ footer {
 					</tbody>
 				</table>
 			</div>
-		</main>
-		<footer>
-			Served with <a rel="noopener noreferrer" href="https://caddyserver.com">Caddy</a>
-		</footer>
+		</main>		
 		<script>
 			var filterEl = document.getElementById('filter');
 			filterEl.focus();
