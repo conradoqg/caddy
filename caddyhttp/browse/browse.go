@@ -274,15 +274,17 @@ func directoryListing(files []os.FileInfo, canGoUp bool, urlPath string, config 
 			if name == indexName {
 				hasIndexFile = true
 				break
-			} else if name == "README.md" {
-				f, err := config.Fs.Root.Open(urlPath + name)
+			}
+		}
+
+		if strings.ToLower(name) == "readme.md" {
+			f, err := config.Fs.Root.Open(urlPath + name)
+			if err == nil {
+				reader := bufio.NewReader(f)
+				markdown, err := ioutil.ReadAll(reader)
 				if err == nil {
-					reader := bufio.NewReader(f)
-					markdown, err := ioutil.ReadAll(reader)
-					if err == nil {
-						readme = string(blackfriday.Run(normalizeNewlines(markdown)))
-						hasReadmeFile = true
-					}
+					readme = string(blackfriday.Run(normalizeNewlines(markdown)))
+					hasReadmeFile = true
 				}
 			}
 		}
