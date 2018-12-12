@@ -282,6 +282,7 @@ func directoryListing(files []os.FileInfo, canGoUp bool, urlPath string, config 
 			if err == nil {
 				reader := bufio.NewReader(f)
 				markdown, err := ioutil.ReadAll(reader)
+				f.Close()
 				if err == nil {
 					readme = string(blackfriday.Run(normalizeNewlines(markdown)))
 					hasReadmeFile = true
