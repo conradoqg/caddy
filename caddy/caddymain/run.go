@@ -38,7 +38,7 @@ import (
 
 	_ "github.com/conradoqg/caddy/caddyhttp" // plug in the HTTP server type
 	// This is where other plugins get plugged in (imported)
-	_ "github.com/hacdias/caddy-service"
+	_ "github.com/conradoqg/caddy-service"
 )
 
 func init() {
