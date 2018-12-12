@@ -21,7 +21,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/mholt/caddy/caddyfile"
+	"github.com/conradoqg/caddy/caddyfile"
 	"github.com/mholt/certmagic"
 )
 

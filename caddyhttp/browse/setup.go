@@ -20,9 +20,9 @@ import (
 	"net/http"
 	"text/template"
 
-	"github.com/mholt/caddy"
-	"github.com/mholt/caddy/caddyhttp/httpserver"
-	"github.com/mholt/caddy/caddyhttp/staticfiles"
+	"github.com/conradoqg/caddy"
+	"github.com/conradoqg/caddy/caddyhttp/httpserver"
+	"github.com/conradoqg/caddy/caddyhttp/staticfiles"
 )
 
 func init() {
@@ -158,6 +158,25 @@ header {
 	padding-top: 25px;
 	padding-bottom: 15px;
 	background-color: #f2f2f2;
+}
+
+.logo {
+	background-color: #E40512;
+	width: 100%
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.logo h1 {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 27px;
+	color: white;
+}
+
+.logo img {
+	display: inline-block;
+	vertical-align: middle;
 }
 
 h1 {
@@ -384,11 +403,14 @@ footer {
 				<!-- Down arrow -->
 				<g id="down-arrow" transform="translate(-279.22 -208.12)">
 					<path transform="matrix(.22413 0 0 -.12089 335.67 257.93)" stroke-width="0" d="m-194.17 412.01h-28.827-28.827l14.414-24.965 14.414-24.965 14.414 24.965z"/>
-				</g>
+				</g>				
 			</defs>
 		</svg>
-
-		<header>
+		<header class="logo">
+			<img src="https://github.com/conradoqg/arte-server/raw/master/public/arte32x32.png" alt="Arte" width="32" height="32"/>
+			<h1>Arte</h1>
+		</header>
+		<header>			
 			<h1>
 				{{range $i, $crumb := .Breadcrumbs}}<a href="{{html $crumb.Link}}">{{html $crumb.Text}}</a>{{if ne $i 0}}/{{end}}{{end}}
 			</h1>

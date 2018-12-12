@@ -31,9 +31,9 @@ import (
 	"text/template"
 	"time"
 
+	"github.com/conradoqg/caddy/caddyhttp/httpserver"
+	"github.com/conradoqg/caddy/caddyhttp/staticfiles"
 	"github.com/dustin/go-humanize"
-	"github.com/mholt/caddy/caddyhttp/httpserver"
-	"github.com/mholt/caddy/caddyhttp/staticfiles"
 	blackfriday "gopkg.in/russross/blackfriday.v2"
 )
 
@@ -250,6 +250,14 @@ func (l Listing) applySort() {
 	}
 }
 
+func normalizeNewlines(d []byte) []byte {
+	// replace CR LF \r\n (windows) with LF \n (unix)
+	d = bytes.Replace(d, []byte{13, 10}, []byte{10}, -1)
+	// replace CF \r (mac) with LF \n (unix)
+	d = bytes.Replace(d, []byte{13}, []byte{10}, -1)
+	return d
+}
+
 func directoryListing(files []os.FileInfo, canGoUp bool, urlPath string, config *Config) (Listing, bool) {
 	var (
 		fileinfos           []FileInfo
@@ -272,7 +280,7 @@ func directoryListing(files []os.FileInfo, canGoUp bool, urlPath string, config 
 					reader := bufio.NewReader(f)
 					markdown, err := ioutil.ReadAll(reader)
 					if err == nil {
-						readme = string(blackfriday.Run(markdown))
+						readme = string(blackfriday.Run(normalizeNewlines(markdown)))
 						hasReadmeFile = true
 					}
 				}

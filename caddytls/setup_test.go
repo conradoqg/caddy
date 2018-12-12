@@ -21,7 +21,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/mholt/caddy"
+	"github.com/conradoqg/caddy"
 	"github.com/mholt/certmagic"
 	"github.com/xenolf/lego/certcrypto"
 )

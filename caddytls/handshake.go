@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/mholt/caddy/telemetry"
+	"github.com/conradoqg/caddy/telemetry"
 )
 
 // configGroup is a type that keys configs by their hostname

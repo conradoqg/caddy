@@ -35,9 +35,9 @@ import (
 
 	"crypto/tls"
 
-	"github.com/mholt/caddy"
-	"github.com/mholt/caddy/caddyhttp/httpserver"
-	"github.com/mholt/caddy/caddytls"
+	"github.com/conradoqg/caddy"
+	"github.com/conradoqg/caddy/caddyhttp/httpserver"
+	"github.com/conradoqg/caddy/caddytls"
 )
 
 // Handler is a middleware type that can handle requests as a FastCGI client.

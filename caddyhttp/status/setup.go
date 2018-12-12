@@ -17,8 +17,8 @@ package status
 import (
 	"strconv"
 
-	"github.com/mholt/caddy"
-	"github.com/mholt/caddy/caddyhttp/httpserver"
+	"github.com/conradoqg/caddy"
+	"github.com/conradoqg/caddy/caddyhttp/httpserver"
 )
 
 // init registers Status plugin

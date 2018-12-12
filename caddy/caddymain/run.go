@@ -28,15 +28,15 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/conradoqg/caddy"
+	"github.com/conradoqg/caddy/caddytls"
+	"github.com/conradoqg/caddy/telemetry"
 	"github.com/google/uuid"
 	"github.com/klauspost/cpuid"
-	"github.com/mholt/caddy"
-	"github.com/mholt/caddy/caddytls"
-	"github.com/mholt/caddy/telemetry"
 	"github.com/mholt/certmagic"
 	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 
-	_ "github.com/mholt/caddy/caddyhttp" // plug in the HTTP server type
+	_ "github.com/conradoqg/caddy/caddyhttp" // plug in the HTTP server type
 	// This is where other plugins get plugged in (imported)
 	_ "github.com/hacdias/caddy-service"
 )

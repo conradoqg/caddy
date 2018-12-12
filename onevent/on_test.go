@@ -3,8 +3,8 @@ package onevent
 import (
 	"testing"
 
-	"github.com/mholt/caddy"
-	"github.com/mholt/caddy/onevent/hook"
+	"github.com/conradoqg/caddy"
+	"github.com/conradoqg/caddy/onevent/hook"
 )
 
 func TestSetup(t *testing.T) {

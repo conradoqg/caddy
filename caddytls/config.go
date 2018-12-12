@@ -23,7 +23,7 @@ import (
 	"github.com/xenolf/lego/challenge/tlsalpn01"
 
 	"github.com/klauspost/cpuid"
-	"github.com/mholt/caddy"
+	"github.com/conradoqg/caddy"
 	"github.com/mholt/certmagic"
 	"github.com/xenolf/lego/certcrypto"
 )
@@ -477,7 +477,7 @@ var defaultCiphersNonAESNI = []uint16{
 // getPreferredDefaultCiphers returns an appropriate cipher suite to use, depending on
 // the hardware support available for AES-NI.
 //
-// See https://github.com/mholt/caddy/issues/1674
+// See https://github.com/conradoqg/caddy/issues/1674
 func getPreferredDefaultCiphers() []uint16 {
 	if cpuid.CPU.AesNi() {
 		return defaultCiphers
