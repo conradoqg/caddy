@@ -407,7 +407,7 @@ footer {
 			</defs>
 		</svg>
 		<header class="logo">
-			<img src="https://github.com/conradoqg/arte-server/raw/master/public/arte32x32.png" alt="Arte" width="32" height="32"/>
+			<img src="https://rawcdn.githack.com/conradoqg/caddy/2065e5c41ec488a559031982a134e74f6672069c/public/arte32x32.png?raw=true" alt="Arte" width="32" height="32"/>
 			<h1>Arte</h1>
 		</header>
 		<header>			
